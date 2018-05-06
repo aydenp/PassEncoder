@@ -26,7 +26,7 @@ Apple Wallet (formerly Passbook) pass encoding and signing in Swift.
 
 Add the following line to your dependencies section of `Package.swift`:
 
-    .package(url: "https://github.com/aydenp/PassEncoder.git", .upToNextMajor(from: 1.0.0))
+    .package(url: "https://github.com/aydenp/PassEncoder.git", .upToNextMajor(from: "1.0.0"))
 
 and add "PassEncoder" to your target's dependencies.
 
