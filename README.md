@@ -37,9 +37,30 @@ and add "PassEncoder" to your target's dependencies.
     if let encoder = PassEncoder(passDataURL: directory.appendingPathComponent("pass.json")) {
         // Add a nice icon
         encoder.addFile(from: directory.appendingPathComponent("icon.png"))
-        let passData = encoder.encode(signingInfo: (certificate: URL_TO_CERT.PEM, password: “Pass”))
+        let passData = encoder.encode(signingInfo: (certificate: URL_TO_CERT.PEM, password: CERT_PASSWORD))
         // Your archived .pkpass file is in passData as Data
     }
+    
+Before using the library, you'll also need to set the Apple WWDR certificate URL, which you can [read about below](#creating-and-preparing-your-certificate).
+    
+### Creating and preparing your certificate
+
+You need to repeat this step for each different `passTypeId` you have in your `pass.json`.
+
+1. Go to the [Apple Developer Pass Type IDs page])(https://developer.apple.com/account/ios/identifier/passTypeId) and create your pass type.
+2. Go to the [certificate section](https://developer.apple.com/account/ios/certificate/) and follow the instructions to create a certificate for your pass.
+3. Download the certificate, and ensure it is named `Certificates.p12`.
+4. Run the following command: `openssl pkcs12 -in Certificates.p12 -out PassCert.pem`.
+5. Your pass certificate is now stored in `PassCert.pem`!
+
+You'll also need to download the Apple Worldwide Developer Relations Root Certificate Authority file to sign passes.
+
+1. Download the [certificate from here](https://developer.apple.com/certificationauthority/AppleWWDRCA.cer).
+2. Import it into Keychain Access (double click it).
+3. Find it in Keychain Access, and export it as a .pem file.
+4. Set the `PassSigner`'s WWDR URL to it in your code.
+
+    PassSigner.shared.appleWWDRCertURL = URL(fileURLWithPath: PATH_TO_WWDR_CERT)
 
 ## Documentation
 
