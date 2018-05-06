@@ -10,7 +10,7 @@
 import Foundation
 
 /// A singleton class used to sign PassKit passes.
-public struct PassSigner {
+public class PassSigner {
     /// The shared instance of `PassSigner`.
     public static let shared = PassSigner()
     
