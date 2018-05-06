@@ -12,7 +12,7 @@ import Foundation
 /// A singleton class used to sign PassKit passes.
 public struct PassSigner {
     /// The shared instance of `PassSigner`.
-    static let shared = PassSigner()
+    public static let shared = PassSigner()
     
     // MARK: - Options
     /// The local URL of the Apple Worldwide Developer Relations Root Certificate Authority (required to sign passes).
