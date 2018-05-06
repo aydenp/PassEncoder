@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>PassEncoder  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a title="PassEncoder  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html">PassEncoder Docs</a> (100% documented)</p>
+        <p class="header-right"><a href="https://github.com/aydenp/PassEncoder"><img src="img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html">PassEncoder Reference</a>
+        <img id="carat" src="img/carat.png" />
+        PassEncoder  Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Classes/PassEncoder.html">PassEncoder</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Structs/PassSigner.html">PassSigner</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            
+            <h1 id='passencoder' class='heading'>PassEncoder</h1>
+
+<p>Apple Wallet (formerly Passbook) pass encoding and signing in Swift.</p>
+<h2 id='features' class='heading'>Features</h2>
+
+<ul>
+<li>Modern Swift API</li>
+<li>Allows you to specify custom pass data</li>
+<li>Add other files (images, JSON, etc)</li>
+<li>Manifest generation</li>
+<li>Signing support</li>
+<li>File system managed seamlessly</li>
+<li>Get pass <code>Data</code> easily</li>
+</ul>
+<h2 id='requirements' class='heading'>Requirements</h2>
+
+<ul>
+<li>iOS 10.0+ / macOS 10.12+ / tvOS 10.0+ / watchOS 3.0+</li>
+<li>Or Linux with zlib development package</li>
+<li>Xcode 9.0</li>
+<li>Swift 4.0</li>
+<li>OpenSSL</li>
+</ul>
+<h2 id='installation' class='heading'>Installation</h2>
+<h3 id='swift-package-manager' class='heading'>Swift Package Manager</h3>
+
+<p>Add the following line to your dependencies section of <code>Package.swift</code>:</p>
+<pre class="highlight plaintext"><code>.package(url: "https://github.com/aydenp/PassEncoder.git", .upToNextMajor(from: 1.0.0))
+</code></pre>
+
+<p>and add <q>PassEncoder</q> to your target&rsquo;s dependencies.</p>
+
+<blockquote>
+<p><strong>Heads up!</strong> Because this package requires macOS 10.12+, and as of writing this, SPM does not support setting minimum deployment targets, you will have to manually specify building with that target, or set it in your Xcode project (if applicable).
+    swift build -Xswiftc <q>-target</q> -Xswiftc <q>x86_64-apple-macosx10.12</q></p>
+</blockquote>
+<h2 id='usage' class='heading'>Usage</h2>
+<pre class="highlight plaintext"><code>// Create our encoder
+if let encoder = PassEncoder(passDataURL: directory.appendingPathComponent("pass.json")) {
+    // Add a nice icon
+    encoder.addFile(from: directory.appendingPathComponent("icon.png"))
+    let passData = encoder.encode(signingInfo: (certificate: URL_TO_CERT.PEM, password: CERT_PASSWORD))
+    // Your archived .pkpass file is in passData as Data
+}
+</code></pre>
+
+<p>Before using the library, you&rsquo;ll also need to set the Apple WWDR certificate URL, which you can <a href="#creating-and-preparing-your-certificate">read about below</a>.</p>
+
+<blockquote>
+<p><strong>Heads up!</strong> Operations in this library are all synchronous, so it is advisable to run them on a separate <code>OperationQueue</code> so that they do not block your thread.</p>
+</blockquote>
+<h3 id='creating-and-preparing-your-certificate' class='heading'>Creating and preparing your certificate</h3>
+
+<p>You need to repeat this step for each different <code>passTypeId</code> you have in your <code>pass.json</code>.</p>
+
+<ol>
+<li>Go to the <a href="https://developer.apple.com/account/ios/identifier/passTypeId">Apple Developer Pass Type IDs page</a> and create your pass type.</li>
+<li>Go to the <a href="https://developer.apple.com/account/ios/certificate/">certificate section</a> and follow the instructions to create a certificate for your pass.</li>
+<li>Download the certificate, and ensure it is named <code>Certificates.p12</code>.</li>
+<li>Run the following command: <code>openssl pkcs12 -in Certificates.p12 -out PassCert.pem</code>.</li>
+<li>Your pass certificate is now stored in <code>PassCert.pem</code>!</li>
+</ol>
+
+<p>You&rsquo;ll also need to download the Apple Worldwide Developer Relations Root Certificate Authority file to sign passes.</p>
+
+<ol>
+<li>Download the <a href="https://developer.apple.com/certificationauthority/AppleWWDRCA.cer">certificate from here</a>.</li>
+<li>Import it into Keychain Access (double click it).</li>
+<li>Find it in Keychain Access, and export it as a .pem file.</li>
+<li><p>Set the <code><a href="Structs/PassSigner.html">PassSigner</a></code>&lsquo;s WWDR URL to it in your code.</p>
+<pre class="highlight plaintext"><code>PassSigner.shared.appleWWDRCertURL = URL(fileURLWithPath: PATH_TO_WWDR_CERT)
+</code></pre></li>
+</ol>
+<h2 id='documentation' class='heading'>Documentation</h2>
+
+<p>Coming soon</p>
+<h2 id='contributing' class='heading'>Contributing</h2>
+
+<p>Feel free to contribute to the source code of PassEncoder to make it something even better! Just try to adhere to the general coding style throughout, to make it as readable as possible.</p>
+
+<p>If you find an issue in the code or while using it, <a href="/issues/new">create an issue</a>. If you can, you&rsquo;re encouraged to contribute and make a <a href="/pulls">pull request</a>.</p>
+<h2 id='license' class='heading'>License</h2>
+
+<p>This project is licensed under the <a href="/LICENSE">MIT license</a>. Please make sure you comply with its terms while using it in any way.</p>
+<h2 id='links' class='heading'>Links</h2>
+
+<ul>
+<li><a href="https://www.madebyayden.co">My website</a></li>
+<li><a href="https://www.github.com/aydenp/PassEncoder">GitHub</a></li>
+</ul>
+
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2018 <a class="link" href="https://madebyayden.co" target="_blank" rel="external">Ayden Panhuyzen</a>. All rights reserved. (Last updated: 2018-05-06)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

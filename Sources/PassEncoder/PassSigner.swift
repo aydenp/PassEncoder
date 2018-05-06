@@ -1,20 +1,29 @@
 import Foundation
 
-struct PassSigner {
+/// A singleton class used to sign PassKit passes.
+public struct PassSigner {
+    /// The shared instance of `PassSigner`.
     static let shared = PassSigner()
-    var appleWWDRCertURL: URL?, openSSLURL = URL(fileURLWithPath: "/usr/bin/openssl")
     
-    /// A tuple representing a certificate URL (expected .pem) and password.
-    typealias SigningInfo = (certificate: URL, password: String)
+    // MARK: - Options
+    /// The local URL of the Apple Worldwide Developer Relations Root Certificate Authority (required to sign passes).
+    public var appleWWDRCertURL: URL?
+    /// The URL to your OpenSSL binary. Set it if yours is in a different location than /usr/bin/openssl.
+    public var openSSLURL = URL(fileURLWithPath: "/usr/bin/openssl")
+    
+    private init() {}
+    
+    // MARK: - Signing
     
     /**
      Sign the provided pass manifest data.
+     - Note: This method will fail and crash your program if you haven't set `appleWWDRCertURL`.
      - parameter url: The URL of the pass's manifest.json file.
      - parameter signatureURL: The signature URL to write to.
      - parameter info: The signing info to sign this pass manifest with.
      - returns: Whether or not the operation was successful.
      */
-    func signPassManifest(at url: URL, toSignatureAt signatureURL: URL, info: SigningInfo) -> Bool {
+    public func signPassManifest(at url: URL, toSignatureAt signatureURL: URL, info: SigningInfo) -> Bool {
         guard let caURL = appleWWDRCertURL else { fatalError("You must specify the location of your Apple WWDR CA certificate (PassSigner.shared.appleWWDRCertURL).") }
         
         let task = Process()
@@ -24,4 +33,10 @@ struct PassSigner {
         task.waitUntilExit()
         return task.terminationStatus == 0
     }
+}
+
+/// MARK: - Types
+extension PassSigner {
+    /// A tuple representing a certificate URL (expected .pem) and password.
+    public typealias SigningInfo = (certificate: URL, password: String)
 }

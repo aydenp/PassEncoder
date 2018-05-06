@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>PassEncoder Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/PassEncoder" class="dashAnchor"></a>
+    <a title="PassEncoder Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">PassEncoder Docs</a> (100% documented)</p>
+        <p class="header-right"><a href="https://github.com/aydenp/PassEncoder"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">PassEncoder Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        PassEncoder Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/PassEncoder.html">PassEncoder</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/PassSigner.html">PassSigner</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>PassEncoder</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">PassEncoder</span></code></pre>
+
+                </div>
+              </div>
+            <p>A class used to encode PassKit passes.</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    This class can <strong>only be used once</strong>. After running <code>encode(signingInfo:, completion:)</code> once, it will throw a fatal error.
+
+</div>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11PassEncoderAACABSgs10DictionaryVySSypG8passData_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(passData:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11PassEncoderAACABSgs10DictionaryVySSypG8passData_tcfc">init(passData:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Intiialize the encoder with the provided pass.json data. Will return nil if an error occurs.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">?(</span><span class="nv">passData</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">])</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>passData</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The data to use for pass.json</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/aydenp/PassEncoder/tree/master/Sources/PassEncoder/PassEncoder.swift#L15-L25">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11PassEncoderAACABSg10Foundation3URLV08passDataD0_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(passDataURL:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11PassEncoderAACABSg10Foundation3URLV08passDataD0_tcfc">init(passDataURL:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Intiialize the encoder with the provided pass.json URL. Will return nil if an error occurs.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="n">convenience</span> <span class="kd">public</span> <span class="nf">init</span><span class="p">?(</span><span class="nv">passDataURL</span><span class="p">:</span> <span class="kt">URL</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>passDataURL</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The URL pass.json is located at.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/aydenp/PassEncoder/tree/master/Sources/PassEncoder/PassEncoder.swift#L31-L34">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11PassEncoderAACfd"></a>
+                    <a name="//apple_ref/swift/Method/deinit" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11PassEncoderAACfd">deinit</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Called when deinitializing the encoder. Used to remove our temporary directory.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">deinit</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/aydenp/PassEncoder/tree/master/Sources/PassEncoder/PassEncoder.swift#L37-L40">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/File%20Management"></a>
+                <a name="//apple_ref/swift/Section/File Management" class="dashAnchor"></a>
+                <a href="#/File%20Management">
+                  <h3 class="section-name">File Management</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11PassEncoderAAC7addFileSb10Foundation3URLV4from_SSSg10customNametF"></a>
+                    <a name="//apple_ref/swift/Method/addFile(from:customName:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11PassEncoderAAC7addFileSb10Foundation3URLV4from_SSSg10customNametF">addFile(from:customName:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Add the file at the provided URL to the pass.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">addFile</span><span class="p">(</span><span class="n">from</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="nv">customName</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>url</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The URL of the file to add to the pass.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>customName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A custom name to add the file with.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Whether or not the operation was successful.</p>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/aydenp/PassEncoder/tree/master/Sources/PassEncoder/PassEncoder.swift#L50-L53">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11PassEncoderAAC7addFileSbSS5named_10Foundation4DataV4fromtF"></a>
+                    <a name="//apple_ref/swift/Method/addFile(named:from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11PassEncoderAAC7addFileSbSS5named_10Foundation4DataV4fromtF">addFile(named:from:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Add a file with the provided data to the pass with the provided name.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">addFile</span><span class="p">(</span><span class="n">named</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">from</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">Data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of the file to add in the pass&rsquo;s directory.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>data</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The data to create the file with.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Whether or not the operation was successful.</p>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/aydenp/PassEncoder/tree/master/Sources/PassEncoder/PassEncoder.swift#L61-L65">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Final%20Encoding"></a>
+                <a name="//apple_ref/swift/Section/Final Encoding" class="dashAnchor"></a>
+                <a href="#/Final%20Encoding">
+                  <h3 class="section-name">Final Encoding</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11PassEncoderAAC6encode10Foundation4DataVSgAD3URLV11certificate_SS8passwordtSg11signingInfo_tF"></a>
+                    <a name="//apple_ref/swift/Method/encode(signingInfo:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11PassEncoderAAC6encode10Foundation4DataVSgAD3URLV11certificate_SS8passwordtSg11signingInfo_tF">encode(signingInfo:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Perform the encoding process and return the signed and archived pass as <code>Data</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">encode</span><span class="p">(</span><span class="nv">signingInfo</span><span class="p">:</span> <span class="kt"><a href="../Structs/PassSigner.html">PassSigner</a></span><span class="o">.</span><span class="kt">SigningInfo</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Data</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>signingInfo</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The certificate and password to sign the pass with. If left out, the pass will not be signed.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The pass&rsquo;s data, if successful.</p>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/aydenp/PassEncoder/tree/master/Sources/PassEncoder/PassEncoder.swift#L102-L115">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2018 <a class="link" href="https://madebyayden.co" target="_blank" rel="external">Ayden Panhuyzen</a>. All rights reserved. (Last updated: 2018-05-06)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

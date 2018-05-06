@@ -4,7 +4,7 @@ import CryptoSwift
 
 /// A class used to encode PassKit passes.
 /// - NOTE: This class can **only be used once**. After running `encode(signingInfo:, completion:)` once, it will throw a fatal error.
-class PassEncoder {
+public class PassEncoder {
     private let directory = FileManager.default.temporaryDirectory.appendingPathComponent("PassEncoder-\(UUID().uuidString)-\(Date().timeIntervalSince1970)")
     private var isUsed = false, hashes = [String: String](), archive: Archive!
     
@@ -12,7 +12,7 @@ class PassEncoder {
      Intiialize the encoder with the provided pass.json data. Will return nil if an error occurs.
      - parameter passData: The data to use for pass.json
      */
-    init?(passData: [String: Any]) {
+    public init?(passData: [String: Any]) {
         // Create our temporary directory
         guard (try? FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true, attributes: nil)) != nil else { return nil }
         
@@ -28,11 +28,12 @@ class PassEncoder {
      Intiialize the encoder with the provided pass.json URL. Will return nil if an error occurs.
      - parameter passDataURL: The URL pass.json is located at.
      */
-    convenience init?(passDataURL: URL) {
+    convenience public init?(passDataURL: URL) {
         guard let data = try? Data(contentsOf: passDataURL), let json = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any] else { return nil }
         self.init(passData: json)
     }
     
+    /// Called when deinitializing the encoder. Used to remove our temporary directory.
     deinit {
         guard FileManager.default.fileExists(atPath: directory.path) else { return }
         _ = try? FileManager.default.removeItem(at: directory)
@@ -46,7 +47,7 @@ class PassEncoder {
      - parameter customName: A custom name to add the file with.
      - returns: Whether or not the operation was successful.
      */
-    func addFile(from url: URL, customName: String? = nil) -> Bool {
+    public func addFile(from url: URL, customName: String? = nil) -> Bool {
         guard let data = try? Data(contentsOf: url) else { return false }
         return addFile(named: customName ?? url.lastPathComponent, from: data)
     }
@@ -57,7 +58,7 @@ class PassEncoder {
      - parameter data: The data to create the file with.
      - returns: Whether or not the operation was successful.
      */
-    func addFile(named name: String, from data: Data) -> Bool {
+    public func addFile(named name: String, from data: Data) -> Bool {
         guard writeTemporaryFile(to: name, data: data), addFileToArchive(with: name) else { return false }
         hashes[name.lowercased()] = data.sha1().toHexString()
         return true
@@ -98,7 +99,7 @@ class PassEncoder {
      - parameter signingInfo: The certificate and password to sign the pass with. If left out, the pass will not be signed.
      - returns: The pass's data, if successful.
      */
-    func encode(signingInfo: PassSigner.SigningInfo?) -> Data? {
+    public func encode(signingInfo: PassSigner.SigningInfo?) -> Data? {
         guard !isUsed else { fatalError("This PassEncoder has already been used, and may not be used again.") }
         isUsed = true
         

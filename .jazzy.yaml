@@ -1,0 +1,18 @@
+# Run jazzy from the current directory to generate documentation.
+
+module: PassEncoder
+module_version: 1.0.3
+author: Ayden Panhuyzen
+author_url: https://madebyayden.co
+github_url: https://github.com/aydenp/PassEncoder
+github_file_prefix: https://github.com/aydenp/PassEncoder/tree/master
+min_acl: internal
+output: docs
+skip_undocumented: true
+clean: true
+xcodebuild_arguments: [-project, PassEncoder.xcodeproj, -target, PassEncoder]
+
+# Keep this until Cocoadocs is using a Jazzy release with the updated config keys:
+module: PassEncoder
+author: Ayden Panhuyzen
+author_url: https://madebyayden.co
