@@ -10,7 +10,7 @@ Apple Wallet Pass encoding and signing in Swift.
 - Manifest generation
 - Signing support
 - File system managed seamlessly
-- Get pass `Data` from a callback
+- Get pass `Data` easily
 
 ## Requirements
 
@@ -33,7 +33,13 @@ and add "PassEncoder" to your target's dependencies.
 
 ## Usage
 
-Coming soon
+    // Create our encoder
+    if let encoder = PassEncoder(passDataURL: directory.appendingPathComponent("pass.json")) {
+        // Add a nice icon
+        encoder.addFile(from: directory.appendingPathComponent("icon.png"))
+        let passData = encoder.encode(signingInfo: (certificate: URL_TO_CERT.PEM, password: “Pass”))
+        // Your archived .pkpass file is in passData as Data
+    }
 
 ## Documentation
 
