@@ -1,6 +1,6 @@
 # PassEncoder
 
-Apple Wallet Pass encoding and signing in Swift.
+Apple Wallet (formerly Passbook) pass encoding and signing in Swift.
 
 ## Features
 
