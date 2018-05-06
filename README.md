@@ -31,6 +31,9 @@ Add the following line to your dependencies section of `Package.swift`:
 
 and add "PassEncoder" to your target's dependencies.
 
+> **Heads up!** Because this package requires macOS 10.11+, and as of writing this, SPM does not support setting minimum deployment targets, you will have to manually specify building with that target, or set it in your Xcode project (if applicable).
+>     swift build -Xswiftc "-target" -Xswiftc "x86_64-apple-macosx10.11"
+
 ## Usage
 
     // Create our encoder
@@ -43,6 +46,8 @@ and add "PassEncoder" to your target's dependencies.
     
 Before using the library, you'll also need to set the Apple WWDR certificate URL, which you can [read about below](#creating-and-preparing-your-certificate).
     
+> **Heads up!** Operations in this library are all synchronous, so it is advisable to run them on a separate `OperationQueue` so that they do not block your thread.
+
 ### Creating and preparing your certificate
 
 You need to repeat this step for each different `passTypeId` you have in your `pass.json`.

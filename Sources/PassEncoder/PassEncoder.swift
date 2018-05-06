@@ -95,18 +95,20 @@ class PassEncoder {
     
     /**
      Perform the encoding process and return the signed and archived pass as `Data`.
-     - parameter signingInfo: The certificate and password to sign the pass with.
+     - parameter signingInfo: The certificate and password to sign the pass with. If left out, the pass will not be signed.
      - returns: The pass's data, if successful.
      */
-    func encode(signingInfo: PassSigner.SigningInfo) -> Data? {
+    func encode(signingInfo: PassSigner.SigningInfo?) -> Data? {
         guard !isUsed else { fatalError("This PassEncoder has already been used, and may not be used again.") }
         isUsed = true
         
         // Write our manifest
         guard addJSONFile(named: "manifest.json", data: hashes) else { return nil }
         
-        // Sign our manifest and add the signature to the archive
-        guard PassSigner.shared.signPassManifest(at: temporaryURL(for: "manifest.json"), toSignatureAt: temporaryURL(for: "signature"), info: signingInfo), addFileToArchive(with: "signature") else { return nil }
+        if let signingInfo = signingInfo {
+            // Sign our manifest and add the signature to the archive
+            guard PassSigner.shared.signPassManifest(at: temporaryURL(for: "manifest.json"), toSignatureAt: temporaryURL(for: "signature"), info: signingInfo), addFileToArchive(with: "signature") else { return nil }
+        }
         
         return try? Data(contentsOf: archive.url)
     }
