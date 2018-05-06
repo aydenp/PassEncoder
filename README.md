@@ -64,11 +64,11 @@ You'll also need to download the Apple Worldwide Developer Relations Root Certif
 3. Find it in Keychain Access, and export it as a .pem file.
 4. Set the `PassSigner`'s WWDR URL to it in your code.
 
-        PassSigner.shared.appleWWDRCertURL = URL(fileURLWithPath: PATH_TO_WWDR_CERT)
+        PassSigner.shared.appleWWDRCertURL = URL(fileURLWithPath: PATH_TO_WWDR_CERT.PEM)
 
 ## Documentation
 
-Coming soon
+To take full advantage of the package, check out the [documentation](https://aydenp.github.io/PassEncoder/) and see all of the methods and variables that are made available to you.
 
 ## Contributing
 
@@ -84,3 +84,4 @@ This project is licensed under the [MIT license](/LICENSE). Please make sure you
 
 - [My website](https://www.madebyayden.co)
 - [GitHub](https://www.github.com/aydenp/PassEncoder)
+- [Documentation](https://aydenp.github.io/PassEncoder/)
