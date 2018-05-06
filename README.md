@@ -21,6 +21,16 @@ Apple Wallet Pass encoding and signing in Swift.
 
 (as per [ZIPFoundation](https://github.com/weichsel/ZIPFoundation)'s requirements)
 
+## Installation
+
+### Swift Package Manager
+
+Add the following line to your dependencies section of `Package.swift`:
+
+    .package(url: "https://github.com/aydenp/PassEncoder.git", .upToNextMajor(from: 1.0.0))
+
+and add "PassEncoder" to your target's dependencies.
+
 ## Usage
 
 Coming soon
