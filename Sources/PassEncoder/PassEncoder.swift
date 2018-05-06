@@ -1,3 +1,12 @@
+//
+//  PassEncoder.swift
+//  PassEncoder
+//
+//  Created by Ayden Panhuyzen on 2018-05-05.
+//  Copyright © 2018 Ayden Panhuyzen. Licensed under the MIT license.
+//  Read /LICENSE in the repository where this file originated for more information.
+//
+
 import Foundation
 import ZIPFoundation
 import CryptoSwift
