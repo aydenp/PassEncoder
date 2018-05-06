@@ -119,12 +119,12 @@ if let encoder = PassEncoder(passDataURL: directory.appendingPathComponent("pass
 <li>Import it into Keychain Access (double click it).</li>
 <li>Find it in Keychain Access, and export it as a .pem file.</li>
 <li><p>Set the <code><a href="Structs/PassSigner.html">PassSigner</a></code>&lsquo;s WWDR URL to it in your code.</p>
-<pre class="highlight plaintext"><code>PassSigner.shared.appleWWDRCertURL = URL(fileURLWithPath: PATH_TO_WWDR_CERT)
+<pre class="highlight plaintext"><code>PassSigner.shared.appleWWDRCertURL = URL(fileURLWithPath: PATH_TO_WWDR_CERT.PEM)
 </code></pre></li>
 </ol>
 <h2 id='documentation' class='heading'>Documentation</h2>
 
-<p>Coming soon</p>
+<p>To take full advantage of the package, check out the <a href="https://aydenp.github.io/PassEncoder/">documentation</a> and see all of the methods and variables that are made available to you.</p>
 <h2 id='contributing' class='heading'>Contributing</h2>
 
 <p>Feel free to contribute to the source code of PassEncoder to make it something even better! Just try to adhere to the general coding style throughout, to make it as readable as possible.</p>
@@ -138,6 +138,7 @@ if let encoder = PassEncoder(passDataURL: directory.appendingPathComponent("pass
 <ul>
 <li><a href="https://www.madebyayden.co">My website</a></li>
 <li><a href="https://www.github.com/aydenp/PassEncoder">GitHub</a></li>
+<li><a href="https://aydenp.github.io/PassEncoder/">Documentation</a></li>
 </ul>
 
           </section>
