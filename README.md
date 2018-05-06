@@ -60,7 +60,7 @@ You'll also need to download the Apple Worldwide Developer Relations Root Certif
 3. Find it in Keychain Access, and export it as a .pem file.
 4. Set the `PassSigner`'s WWDR URL to it in your code.
 
-    PassSigner.shared.appleWWDRCertURL = URL(fileURLWithPath: PATH_TO_WWDR_CERT)
+        PassSigner.shared.appleWWDRCertURL = URL(fileURLWithPath: PATH_TO_WWDR_CERT)
 
 ## Documentation
 
