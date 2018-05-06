@@ -23,6 +23,15 @@ class PassEncoder {
         // Write our pass.json data to a file
         guard addJSONFile(named: "pass.json", data: passData) else { return nil }
     }
+
+    /**
+     Intiialize the encoder with the provided pass.json URL. Will return nil if an error occurs.
+     - parameter passDataURL: The URL pass.json is located at.
+     */
+    convenience init?(passDataURL: URL) {
+        guard let data = try? Data(contentsOf: passDataURL), let json = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any] else { return nil }
+        self.init(passData: json)
+    }
     
     deinit {
         guard FileManager.default.fileExists(atPath: directory.path) else { return }
@@ -87,18 +96,18 @@ class PassEncoder {
     /**
      Perform the encoding process and return the signed and archived pass as `Data`.
      - parameter signingInfo: The certificate and password to sign the pass with.
-     - parameter completion: A callback to receive the optional `Data` at.
+     - returns: The pass's data, if successful.
      */
-    func encode(signingInfo: PassSigner.SigningInfo, completion: (Data?) -> Void) {
+    func encode(signingInfo: PassSigner.SigningInfo) -> Data? {
         guard !isUsed else { fatalError("This PassEncoder has already been used, and may not be used again.") }
         isUsed = true
         
         // Write our manifest
-        guard addJSONFile(named: "manifest.json", data: hashes) else { completion(nil); return }
+        guard addJSONFile(named: "manifest.json", data: hashes) else { return nil }
         
         // Sign our manifest and add the signature to the archive
-        guard PassSigner.shared.signPassManifest(at: temporaryURL(for: "manifest.json"), toSignatureAt: temporaryURL(for: "signature"), info: signingInfo), addFileToArchive(with: "signature") else { completion(nil); return }
+        guard PassSigner.shared.signPassManifest(at: temporaryURL(for: "manifest.json"), toSignatureAt: temporaryURL(for: "signature"), info: signingInfo), addFileToArchive(with: "signature") else { return nil }
         
-        completion(try? Data(contentsOf: archive.url))
+        return try? Data(contentsOf: archive.url)
     }
 }
