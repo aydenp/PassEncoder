@@ -47,7 +47,7 @@ Before using the library, you'll also need to set the Apple WWDR certificate URL
 
 You need to repeat this step for each different `passTypeId` you have in your `pass.json`.
 
-1. Go to the [Apple Developer Pass Type IDs page])(https://developer.apple.com/account/ios/identifier/passTypeId) and create your pass type.
+1. Go to the [Apple Developer Pass Type IDs page](https://developer.apple.com/account/ios/identifier/passTypeId) and create your pass type.
 2. Go to the [certificate section](https://developer.apple.com/account/ios/certificate/) and follow the instructions to create a certificate for your pass.
 3. Download the certificate, and ensure it is named `Certificates.p12`.
 4. Run the following command: `openssl pkcs12 -in Certificates.p12 -out PassCert.pem`.
