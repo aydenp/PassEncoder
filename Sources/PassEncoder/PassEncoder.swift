@@ -9,7 +9,7 @@
 
 import Foundation
 import ZIPFoundation
-import CryptoSwift
+import Crypto
 
 /// A class used to encode PassKit passes.
 /// - NOTE: This class can **only be used once**. After running `encode(signingInfo:, completion:)` once, it will throw a fatal error.
@@ -69,7 +69,15 @@ public class PassEncoder {
      */
     public func addFile(named name: String, from data: Data) -> Bool {
         guard writeTemporaryFile(to: name, data: data), addFileToArchive(with: name) else { return false }
-        hashes[name.lowercased()] = data.sha1().toHexString()
+
+        // Apple says that we are supposed to use the SHA1 digest for all our files
+        // in the manifest. See here: https://developer.apple.com/documentation/walletpasses/building_a_pass
+        var hasher = Insecure.SHA1()
+        hasher.update(data: data)
+        let digest = hasher.finalize()
+        let stringHash = digest.map { String(format: "%02hhx", $0) }.joined()
+
+        hashes[name.lowercased()] = stringHash
         return true
     }
     
