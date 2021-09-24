@@ -41,6 +41,13 @@ public class PassEncoder {
         guard let data = try? Data(contentsOf: passDataURL), let json = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any] else { return nil }
         self.init(passData: json)
     }
+
+    /// Initialize the encoder with the provided JSON data.
+    /// - parameter passData: the pass.json supplied as JSON
+    convenience public init?(passData: Data) {
+        guard let json = (try? JSONSerialization.jsonObject(with: passData, options: [])) as? [String: Any] else { return nil }
+        self.init(passData: json)
+    }
     
     /// Called when deinitializing the encoder. Used to remove our temporary directory.
     deinit {
