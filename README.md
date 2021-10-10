@@ -30,9 +30,6 @@ Add the following line to your dependencies section of `Package.swift`:
 
 and add "PassEncoder" to your target's dependencies.
 
-> **Heads up!** Because this package requires macOS 10.12+, and as of writing this, SPM does not support setting minimum deployment targets, you will have to manually specify building with that target, or set it in your Xcode project (if applicable).
->     swift build -Xswiftc "-target" -Xswiftc "x86_64-apple-macosx10.12"
-
 ## Usage
 
     // Create our encoder

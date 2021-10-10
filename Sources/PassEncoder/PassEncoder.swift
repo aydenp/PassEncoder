@@ -9,7 +9,7 @@
 
 import Foundation
 import ZIPFoundation
-import CryptoSwift
+import Crypto
 
 /// A class used to encode PassKit passes.
 /// - NOTE: This class can **only be used once**. After running `encode(signingInfo:, completion:)` once, it will throw a fatal error.
@@ -41,6 +41,13 @@ public class PassEncoder {
         guard let data = try? Data(contentsOf: passDataURL), let json = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any] else { return nil }
         self.init(passData: json)
     }
+
+    /// Initialize the encoder with the provided JSON data.
+    /// - parameter passData: the pass.json supplied as JSON
+    convenience public init?(passData: Data) {
+        guard let json = (try? JSONSerialization.jsonObject(with: passData, options: [])) as? [String: Any] else { return nil }
+        self.init(passData: json)
+    }
     
     /// Called when deinitializing the encoder. Used to remove our temporary directory.
     deinit {
@@ -69,8 +76,42 @@ public class PassEncoder {
      */
     public func addFile(named name: String, from data: Data) -> Bool {
         guard writeTemporaryFile(to: name, data: data), addFileToArchive(with: name) else { return false }
-        hashes[name.lowercased()] = data.sha1().toHexString()
+
+        hashes[name.lowercased()] = hashData(data: data)
         return true
+    }
+
+    /// Add a file entry to the archive without first creating a temporary file on the filesystem. This is especially
+    /// useful for localized files, which would need to be in a subdirectory, e.g.: `en.lproj/pass.strings`
+    /// - Parameters:
+    ///   - name: the name, including any directories, of the file
+    ///   - data: a `Data` that holds the contents of the file
+    /// - Returns: `true` if the operation was successful
+    public func addData(named name: String, from data: Data) -> Bool {
+        guard addDataEntry(named: name, from: data) else { return false }
+        hashes[name.lowercased()] = hashData(data: data)
+        return true
+    }
+
+    private func hashData(data: Data) -> String {
+        // Apple says that we are supposed to use the SHA1 digest for all our files
+        // in the manifest. See here: https://developer.apple.com/documentation/walletpasses/building_a_pass
+        var hasher = Insecure.SHA1()
+        hasher.update(data: data)
+        let digest = hasher.finalize()
+        return digest.map { String(format: "%02hhx", $0) }.joined()
+    }
+
+    private func addDataEntry(named name: String, from data: Data) -> Bool {
+        do {
+            try archive.addEntry(with: name, type: .file, uncompressedSize: UInt32(data.count), provider: { (position, size) -> Data in
+                // This will be called until `data` is exhausted
+                return data.subdata(in: position..<position+size)
+            })
+            return true
+        } catch {
+            return false
+        }
     }
     
     private func addJSONFile(named name: String, data: [String: Any]) -> Bool {
