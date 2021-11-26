@@ -14,10 +14,9 @@ Apple Wallet (formerly Passbook) pass encoding and signing in Swift.
 
 ## Requirements
 
-- iOS 10.0+ / macOS 10.12+ / tvOS 10.0+ / watchOS 3.0+
-- Or Linux with zlib development package
-- Xcode 9.0
-- Swift 4.0
+- macOS 10.12+ or Linux (with zlib development package)
+- Xcode 9.0+
+- Swift 5.2+
 - OpenSSL
 
 ## Installation
