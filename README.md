@@ -53,9 +53,9 @@ You need to repeat this step for each different `passTypeId` you have in your `p
 4. Run the following command: `openssl pkcs12 -in Certificates.p12 -out PassCert.pem`.
 5. Your pass certificate is now stored in `PassCert.pem`!
 
-You'll also need to download the Apple Worldwide Developer Relations Root Certificate Authority file to sign passes.
+You'll also need to download the Apple Worldwide Developer Relations Intermediate Certificate - G4 file to sign passes.
 
-1. Download the [certificate from here](https://developer.apple.com/certificationauthority/AppleWWDRCA.cer).
+1. Download the [intermediate certificate from here](https://www.apple.com/certificateauthority/AppleWWDRCAG4.cer).
 2. Import it into Keychain Access (double click it).
 3. Find it in Keychain Access, and export it as a .pem file.
 4. Set the `PassSigner`'s WWDR URL to it in your code.
@@ -78,6 +78,6 @@ This project is licensed under the [MIT license](/LICENSE). Please make sure you
 
 ## Links
 
-- [My website](https://www.madebyayden.co)
+- [My website](https://ayden.dev)
 - [GitHub](https://www.github.com/aydenp/PassEncoder)
 - [Documentation](https://aydenp.github.io/PassEncoder/)
